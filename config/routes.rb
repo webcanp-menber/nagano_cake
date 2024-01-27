@@ -8,17 +8,24 @@ Rails.application.routes.draw do
     sessions: 'public/sessions'
   }
 
+  namespace :admin do
+    get "/" => 'homes#top'
+    resources :items, only: [:new, :index, :create, :show, :edit, :update]
+    resources :customers, only: [:index, :show, :edit, :update]
+    resources :orders, only: [:show]
+  end
+
   scope module: :public do
     root to:"homes#top"
     resources :items, only: [:index, :show]
-    resources :customers, only: [:show, :edit, :update]
+    # resources :customers, only: [:show, :edit, :update]
     resources :cart_items, only: [:index, :update, :destory, :create]
     resources :orders, only: [:new, :create, :index, :show]
 
     get "/about" => 'homes#about'
     get "/customers/my_page" => 'customers#show'
     get "/customers/information/edit" => 'customers#edit'
-    get "/customers/informaiton" => 'customers#update'
+    patch "/customers/informaiton" => 'customers#update'
     get "/customers/unsubscribe" => 'customers#unsubscribe'
     patch "/customers/withdraw" => 'customers#withdraw'
     delete "/cart_items/destroy_all" => 'cart_items#destroy_all'
@@ -28,12 +35,7 @@ Rails.application.routes.draw do
   end
 
 
-  namespace :admin do
-    get "/" => 'homes#top'
-    resources :items, only: [:new, :index, :create, :show, :edit, :update]
-    resources :customers, only: [:index, :show, :edit, :update]
-    resources :orders, only: [:show]
-  end
+
 
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
