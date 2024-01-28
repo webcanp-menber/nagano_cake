@@ -1,2 +1,21 @@
 <h2>商品一覧</h2><P>全x件</P>
 
+<%= link_to "+", new_admin_item_path %>
+
+        <table class="table table-hover table-inverse">
+          <tbody>
+            <tr>
+            <% @items.each_slice(4) do |row| %>
+              <% row.each do |item| %>
+                <td>
+                  <%= link_to item_path(item.id) do %>
+                    <%= image_tag item.get_image %>
+                  <% end %></br>
+                  <%= item.name %></br>
+                  ¥<%= item.price %>
+                </td>
+              <% end %>
+            </tr>
+            <% end %>
+          </tbody>
+        </table>

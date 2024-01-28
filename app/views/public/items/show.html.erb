@@ -1,0 +1,21 @@
+  <%= image_tag @item.get_image %>
+
+    <table class="table table-hover table-inverse">
+      <tbody>
+        <tr>
+          <td><%= @item.name %></td>
+        </tr>
+        <tr>
+          <td><%= @item.introduction %></td>
+        </tr>
+        <tr>
+          <td>¥<%= @item.price %>(税込)</td>
+        </tr>
+        <tr>
+          <td>
+          個数選択
+        　カートに入れる
+        　</td>
+        </tr>
+      </tbody>
+    </table>
