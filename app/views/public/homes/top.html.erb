@@ -4,21 +4,22 @@
 <p>購入には会員登録が必要になります。</p></br>
 
 <h2>新着商品</h2>
-<table>
-  <tbody>
-    <tr>
-      <th>商品名</th>
-      <th>商品名</th>
-      <th>商品名</th>
-      <th>商品名</th>
-    </tr>
-    <tr>
-      <th>金額</th>
-      <th>金額</th>
-      <th>金額</th>
-      <th>金額</th>
-    </tr>
-  </tbody>
-</table>
+<table class="table table-hover table-inverse">
+          <tbody>
+            <tr>
+            <% @items.each_slice(4) do |row| %>
+              <% row.each do |item| %>
+                <td>
+                  <%= link_to item_path(item.id) do %>
+                    <%= image_tag item.get_image %>
+                  <% end %></br>
+                  <%= item.name %></br>
+                  ¥<%= (item.price*1.1).floor %>
+                </td>
+              <% end %>
+            </tr>
+            <% end %>
+          </tbody>
+        </table>
 
 <%= link_to "全ての商品を見る＞", items_path %>

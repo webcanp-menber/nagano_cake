@@ -14,24 +14,31 @@
     <header>
       <nav class="navbar navbar-expand-lg">
         <div class="container">
-          <h1>LOGO</h1>
-          <!--↑後からリンク追加-->
+          <nav class="navbar-brand">
+            <% if admin_signed_in? %>
+              <%= link_to "LOGO", "/admin", class:"nav-link h2 text-secondary" %>
+            <% elsif customer_signed_in? %>
+              <%= link_to "LOGO", "/", class:"nav-link h2 text-secondary" %>
+            <% else %>
+              <%= link_to "LOGO", "/", class:"nav-link h2 text-secondary" %>
+            <% end %>
+          </nav>
           <ul class="navbar-nav ml-auto flex-row">
             <% if admin_signed_in? %>
-              <li class="nav-item"><%= link_to "商品一覧", admin_items_path %></li>
-              <li class="nav-item"><%= link_to "会員一覧", admin_customers_path %></li>
-              <li class="nav-item"><%= link_to "注文履歴一覧", admin_path %></li>
-              <li class="nav-item"><%= link_to "ログアウト", destroy_admin_session_path, method: :delete %></li>
+              <li class="nav-item"><%= link_to "商品一覧", admin_items_path, class:'btn btn-outline-secondary', role:'button' %></li>
+              <li class="nav-item"><%= link_to "会員一覧", admin_customers_path, class:'btn btn-outline-secondary', role:'button' %></li>
+              <li class="nav-item"><%= link_to "注文履歴一覧", admin_path, class:'btn btn-outline-secondary', role:'button' %></li>
+              <li class="nav-item"><%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class:'btn btn-outline-secondary', role:'button' %></li>
             <% elsif customer_signed_in? %>
-              <li class="nav-item"><%= link_to "マイページ", customers_my_page_path %></li>
-              <li class="nav-item"><%= link_to "商品一覧", items_path %></li>
-              <li class="nav-item"><%= link_to "カート",  cart_items_path %></li>
-              <li class="nav-item"><%= link_to "ログアウト", destroy_customer_session_path, method: :delete %></li>
+              <li class="nav-item"><%= link_to "マイページ", customers_my_page_path, class:'btn btn-outline-secondary', role:'button' %></li>
+              <li class="nav-item"><%= link_to "商品一覧", items_path, class:'btn btn-outline-secondary', role:'button' %></li>
+              <li class="nav-item"><%= link_to "カート",  cart_items_path, class:'btn btn-outline-secondary', role:'button' %></li>
+              <li class="nav-item"><%= link_to "ログアウト", destroy_customer_session_path, method: :delete, class:'btn btn-outline-secondary', role:'button' %></li>
             <% else %>
-              <li class="nav-item"><%= link_to "About", about_path %></li>
-              <li class="nav-item"><%= link_to "商品一覧", items_path %></li>
-              <li class="nav-item"><%= link_to "新規登録", new_customer_registration_path %></li>
-              <li class="nav-item"><%= link_to "ログイン", customer_session_path %></li>
+              <li class="nav-item"><%= link_to "About", about_path, class:'btn btn-outline-secondary', role:'button' %></li>
+              <li class="nav-item"><%= link_to "商品一覧", items_path, class:'btn btn-outline-secondary', role:'button' %></li>
+              <li class="nav-item"><%= link_to "新規登録", new_customer_registration_path, class:'btn btn-outline-secondary', role:'button' %></li>
+              <li class="nav-item"><%= link_to "ログイン", customer_session_path, class:'btn btn-outline-secondary', role:'button' %></li>
             <% end %>
           </ul>
         </div>
