@@ -1,6 +1,7 @@
 class CartItem < ApplicationRecord
+require './app/models/item'
 has_one_attached :image
-has_many :items, dependent: :destroy
+belongs_to :item
 belongs_to :customer
 
   def get_image
@@ -10,4 +11,9 @@ belongs_to :customer
     end
       image
   end
+
+  def subtotal
+    item.with_tax_price * amount
+  end
+
 end
