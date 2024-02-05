@@ -11,7 +11,8 @@
   </head>
 
   <body>
-    <header>
+    <div class="footerFixed">
+    <header class="border-bottom border-dark">
       <nav class="navbar navbar-expand-lg">
         <div class="container">
           <nav class="navbar-brand">
@@ -47,8 +48,10 @@
       <nav></nav>
     </header>
     <%= yield %>
-    <footer>
+
+    <footer class="border-top border-dark">
 
     </footer>
+    </div>
   </body>
 </html>
