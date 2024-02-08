@@ -25,16 +25,27 @@ class Public::OrdersController < ApplicationController
 
   def create
     @order = Order.new(order_params)
-    @customer = Customer.find(current_customer.id)
     @cart_items = CartItem.where(customer_id: current_customer.id)
     @items = Item.all
     @total = 0
-     @cart_items.each do |cart_item|
-       @total += cart_item.subtotal
-     end
+      @cart_items.each do |cart_item|
+        @total += cart_item.subtotal
+      end
     # binding.pry
     if @order.save
-      redirect_to orders_complete_path
+          @cart_items.each do |cart_item|
+            @order_detail = OrderDetail.new
+            @order_detail.item_id = @items.find_by(id: cart_item.item_id).id
+            @order_detail.order_id = @order.id
+            @order_detail.amount = cart_item.amount
+            @order_detail.product_price = cart_item.subtotal
+              if @order_detail.save
+              else
+                render :confirm
+              end
+          end
+          @cart_items.destroy_all
+          redirect_to orders_complete_path
     else
       render :confirm
     end
@@ -43,10 +54,21 @@ class Public::OrdersController < ApplicationController
   def complete
   end
 
+  def index
+    @orders = current_customer.orders
+    @order_details = OrderDetail.where(order_id: @orders.pluck(:id))
+    # @item_names = Item.where(id: @order_details.pluck(:item_id)).pluck(:name)
+    @item_names = {}
+    @order_details.each do |order_detail|
+      items = Item.where(id: order_detail.item_id).pluck(:name)
+      @item_names[order_detail.id] = items.join(",")
+    end
+  end
+
   private
 
   def order_params
-    params.require(:order).permit(:name, :postal_code, :address, :payment_method, :customers_id, :total_payment, :postage)
+    params.require(:order).permit(:name, :postal_code, :address, :payment_method, :customer_id, :total_payment, :postage)
   end
 
 end
