@@ -23,3 +23,29 @@ footer {
 .btn-long {
   width: 150px;
 }
+
+.btn-longer {
+  width: 200px;
+}
+
+.underline-link {
+  text-decoration: underline;
+  color: black;
+}
+
+.btn-circle {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 20px;
+  font-size: 15px;
+}
+
+.centered-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  text-align: center;
+}

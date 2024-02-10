@@ -1,9 +1,13 @@
-<h2>商品詳細</h2>
-
-  <%= image_tag @item.get_image %>
-
-    <table class="table table-hover table-inverse">
-      <tbody>
+<div class="container">
+  <div class="row">
+    <mark class="bg-light">商品詳細</mark>
+  </div>
+  <div class="row mt-5">
+    <div class="col-4">
+      <%= image_tag @item.get_image %>
+    </div>
+    <div class="col-8">
+      <table>
         <tr>
           <td>商品名</td>
           <td><%= @item.name %></td>
@@ -13,10 +17,12 @@
           <td><%= @item.introduction %></td>
         </tr>
         <tr>
-          <td>税込価格（税抜価格）</td>
+          <td>税込価格</br>（税抜価格）</td>
           <td><%= (@item.price*1.1).floor %>(<%= @item.price %>)円</td>
         </tr>
-      </tbody>
-    </table>
-
-<%= link_to "編集する", edit_admin_item_path %>
+      </table>
+    </div>
+  <div class="centered-btn mt-5">
+    <%= link_to "編集する", edit_admin_item_path, class:"btn btn-success btn-long" %>
+  </div>
+</div>

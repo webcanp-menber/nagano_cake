@@ -64,6 +64,11 @@ class Public::OrdersController < ApplicationController
       @item_names[order_detail.id] = items.join(",")
     end
   end
+  
+  def show
+    @order = Order.find(params[:id])
+    @order_details = OrderDetail.where(order_id: @order.id)
+  end
 
   private
 
