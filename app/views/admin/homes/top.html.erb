@@ -1,20 +1,29 @@
-<h3>注文履歴一覧</h3>
-
-<table>
-  <th>
+<div class="container">
+  <div class="row">
+    <mark class="bg-light">注文履歴一覧</mark>
+  </div>
+  <table class="table table-hover table-inverse">
+    <thead class="table-light">
+      <tr>
+        <td><strong>購入日時</strong></td>
+        <td><strong>購入者</strong></td>
+        <td><strong>注文個数</strong></td>
+      </tr>
+    </thead>
     <tr>
-      <td>購入日時</td>
-      <td>購入者</td>
-      <td>注文個数</td>
-    </tr>
-  </th>
-  <th>
-    <tr>
-      <% @order.each do |order| %>
-      <td><%= link_to order.created_at, admin_order_path(order) %></td>
+      <% @orders.each do |order| %>
+      <td>
+        <%= link_to admin_order_path(order), class: "underline-link" do %>
+        <%= order.created_at.strftime('%Y/%m/%d %H:%M:%S') %>
+        <% end %>
+      </td>
       <td><%= order.name %></td>
       <td><%= order.order_details.sum(:amount) %></td>
       </tr>
       <% end %>
-  </th>
-</table>
+    </th>
+  </table>
+  <div class="d-flex justify-content-center">
+    <%= paginate @orders %>
+  </div>
+</div>
