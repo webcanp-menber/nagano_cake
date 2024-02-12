@@ -1,0 +1,104 @@
+<div class="container">
+  <div class="row">
+    <mark class="bg-light">注文履歴詳細</mark>
+  </div>
+  <div class="row">
+    <div class="col-6">
+      <strong>注文情報</strong>
+      <table style="width: 100%">
+        <tr>
+          <td style="border: 2.5px solid black">
+            注文日
+          </td>
+          <td style="border: 2.5px solid black">
+            <%= @order.created_at %>
+          </td>
+        </tr>
+        <tr>
+          <td style="border: 2.5px solid black">
+            配送先
+          </td>
+          <td style="border: 2.5px solid black">
+            〒<%= @order.postal_code %></br>
+            <%= @order.address %></br>
+            <%= @order.name %>
+          </td>
+        </tr>
+        <tr>
+          <td style="border: 2.5px solid black">
+            支払方法
+          </td>
+          <td style="border: 2.5px solid black">
+            <%= @order.payment_method_i18n %>
+          </td>
+        </tr>
+      </table>
+    </div>
+    <div class="col-3">
+      <strong>請求情報</strong>
+      <table style="width: 100%">
+        <tr>
+          <td style="border: 2.5px solid black">
+            商品合計
+          </td>
+          <td style="border: 2.5px solid black">
+            <%= @order.total_payment - 800 %>
+          </td>
+        </tr>
+        <tr>
+          <td style="border: 2.5px solid black">
+            配送料
+          </td>
+          <td style="border: 2.5px solid black">
+            800
+          </td>
+        </tr>
+        <tr>
+          <td style="border: 2.5px solid black">
+            ご請求額
+          </td>
+          <td style="border: 2.5px solid black">
+            <%= @order.total_payment %>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+  <div class="row mt-4">
+    <strong>　注文内容</strong>
+  </div>
+    <table style="width: 70%">
+      <thead class="table-light">
+        <tr>
+          <td style="border: 2.5px solid black">
+            商品
+          </td>
+          <td style="border: 2.5px solid black">
+            単価（税込）
+          </td>
+          <td style="border: 2.5px solid black">
+            個数
+          </td>
+          <td style="border: 2.5px solid black">
+            小計
+          </td>
+        </tr>
+      </thead>
+      <tr>
+        <% @order_details.each do |order_detail| %>
+        <td style="border: 2.5px solid black">
+          <%= order_detail.item.name %>
+        </td>
+        <td style="border: 2.5px solid black">
+          <%= (order_detail.item.price*1.1).floor %>
+        </td>
+        <td style="border: 2.5px solid black">
+          <%= order_detail.amount %>
+        </td>
+        <td style="border: 2.5px solid black">
+          <%= order_detail.product_price %>
+        </td>
+      </tr>
+        <% end %>
+    </table>
+</div>

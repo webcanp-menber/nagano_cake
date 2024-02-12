@@ -1,0 +1,36 @@
+<div class="container">
+  <% if @item.errors.any? %>
+    <%= @item.errors.count %>件のエラーが発生しました
+    <ul>
+    <% @item.errors.full_messages.each do |message| %>
+    <li><%= message %></li>
+    <% end %>
+    </ul>
+  <% end %>
+  <div class="row">
+    <mark class="bg-light">商品新規登録</mark>
+    <%= form_with model: @item, url: admin_items_path do |f| %>
+  </div>
+  <table class="center" style="margin: 0 auto;">
+    <tr>
+      <th>商品画像</th>
+      <th><%= f.file_field :image, accept: "image/*" %></th>
+    </tr>
+    <tr>
+      <th>商品名</th>
+      <th><%= f.text_field :name, size: 31, placeholder: "商品名" %></th>
+    </tr>
+    <tr>
+      <th>商品説明</th>
+      <th><%= f.text_area :introduction, rows: 4, cols: 30, placeholder:"ここに説明文を記述します" %></th>
+    </tr>
+    <tr>
+      <th>税抜価格</th>
+      <th><%= f.text_field :price, size: 31 %>円</th>
+    </tr>
+  </table>
+  <div class="centered-btn">
+    <%= f.submit "新規登録", class:"btn btn-success btn-long" %>
+  </div>
+  <% end %>
+</div>

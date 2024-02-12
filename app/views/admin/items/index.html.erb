@@ -1,0 +1,29 @@
+<div class="container">
+  <div class="row d-flex">
+    <mark class="bg-light">商品一覧</mark>
+    <%= link_to "+", new_admin_item_path, class:"btn btn-circle btn-light ml-auto" %>
+  </div>
+    <table class="table table-hover table-inverse">
+      <thead class="table-light">
+        <tr>
+          <td><strong>商品ID</strong></td>
+          <td><strong>商品名</strong></td>
+          <td><strong>税抜価格</strong></td>
+        </tr>
+      </thead>
+      <% @items.each do |item| %>
+        <tr>
+          <td><%= item.id %></td>
+          <td><%= link_to admin_item_path(item.id), class: "underline-link" do %>
+              <%= item.name %>
+              <% end %>
+          </td>
+          <td><%= item.price %></td>
+        </tr>
+      <% end %>
+    </table>
+    <div class="d-flex justify-content-center">
+      <%= paginate @items %>
+    </div>
+  </div>
+</div>

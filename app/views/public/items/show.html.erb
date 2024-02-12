@@ -1,0 +1,33 @@
+<div class="container">
+  <div class="row mt-5">
+    <div class="col-4">
+      <%= image_tag @item.get_image %>
+    </div>
+    <div class="col-8">
+      <table>
+        <tr>
+          <td><h2><strong><%= @item.name %></strong></h2></td>
+        </tr>
+        <tr>
+          <td><%= @item.introduction %></td>
+        </tr>
+        <tr>
+          <td>¥<%= @item.with_tax_price %>(税込)</td>
+        </tr>
+        <tr>
+          <% if customer_signed_in? %>
+            <td>
+              <%= form_with url: cart_items_path, method: :post do |f| %>
+                <%= f.hidden_field 'cart_item[item_id]', :value => @item.id %>
+                <%= f.hidden_field 'cart_item[customer_id]', :value => current_customer.id %>
+                <%= f.select 'cart_item[amount]', options_for_select([["個数選択", 0], *1..5]) %>
+                　　<%= f.submit "カートに入れる", class:"btn btn-success btn-long" %>
+              <% end %>
+          　</td>
+          <% else %>
+          <% end %>
+        </tr>
+
+
+      </tbody>
+    </table>
