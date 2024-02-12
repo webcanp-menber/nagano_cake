@@ -15,5 +15,9 @@ belongs_to :customer
   def subtotal
     item.with_tax_price * amount
   end
+  
+  validates :customer_id, presence: true
+  validates :item_id, presence: true
+  validates :amount, presence: true
 
 end

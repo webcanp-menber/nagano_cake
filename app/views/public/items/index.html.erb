@@ -1,21 +1,24 @@
-<h2>商品一覧</h2><P>全x件</P>
-
-<%= link_to "+", new_admin_item_path %>
-
-        <table class="table table-hover table-inverse">
-          <tbody>
-            <tr>
-            <% @items.each_slice(4) do |row| %>
-              <% row.each do |item| %>
-                <td>
-                  <%= link_to item_path(item.id) do %>
-                    <%= image_tag item.get_image %>
-                  <% end %></br>
-                  <%= item.name %></br>
-                  ¥<%= item.with_tax_price %>
-                </td>
-              <% end %>
-            </tr>
-            <% end %>
-          </tbody>
-        </table>
+<div class="container">
+  <div class="row">
+    <h2><strong>商品一覧</strong></h2>
+    <p>(全<%= @item_count %>件)</p>
+  </div>
+  <table class="table table-hover table-inverse">
+    <% @items.each_slice(4) do |row| %>
+    <tr>
+      <% row.each do |item| %>
+      <td>
+        <%= link_to item_path(item.id) do %>
+        <%= image_tag item.get_image %>
+        <% end %><br>
+        <%= item.name %><br>
+        ¥<%= item.with_tax_price %>
+      </td>
+        <% end %>
+    </tr>
+      <% end %>
+  </table>
+  <div class="d-flex justify-content-center">
+  <%= paginate @items %>
+  </div>
+</div>

@@ -17,6 +17,10 @@ footer {
   color: black;
 }
 
+.underline-link-a {
+  text-decoration: underline;
+}
+
 .form-spacing-left {
   margin-left: 50px;
 }
@@ -48,4 +52,17 @@ footer {
   align-items: center;
   width: 100%;
   text-align: center;
+}
+
+.table-bordered {
+  border: 2.5px solid black;
+}
+
+.centered-text {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 60vh;
 }

@@ -1,4 +1,5 @@
 class Public::CartItemsController < ApplicationController
+  before_action :authenticate_customer!
 
 def create
   @cart_item = CartItem.new(cart_item_params)
@@ -21,6 +22,7 @@ def index
   @cart_items = CartItem.where(customer_id: current_customer.id)
   @items = Item.all
   @total = 0
+  @amount_options = (1..10).to_a
 end
 
 def destroy_all
@@ -30,6 +32,15 @@ def destroy_all
     redirect_to cart_items_path
   else
     render :index
+  end
+end
+
+def update
+  @cart_item = CartItem.find(params[:id])
+  if @cart_item.update(cart_item_params)
+    redirect_to cart_items_path
+  else
+    redirect_to cart_items_path
   end
 end
 

@@ -16,4 +16,8 @@ class Item < ApplicationRecord
     (price * 1.1).floor
   end
 
+  validates :name, presence: true
+  validates :introduction, presence: true
+  validates :price, presence: true
+
 end
