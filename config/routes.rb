@@ -13,6 +13,7 @@ Rails.application.routes.draw do
     resources :items, only: [:new, :index, :create, :show, :edit, :update]
     resources :customers, only: [:index, :show, :edit, :update]
     resources :orders, only: [:show]
+    resources :genres, only: [:index, :create, :show, :edit, :update]
   end
 
   scope module: :public do
@@ -23,7 +24,7 @@ Rails.application.routes.draw do
     patch "/customers/informaiton" => 'customers#update'
     get "/customers/unsubscribe" => 'customers#unsubscribe'
     patch "/customers/withdraw" => 'customers#withdraw'
-    post "orders/confirm" => 'orders#confirm', as:'confirm_order'
+    post "/orders/confirm" => 'orders#confirm', as:'confirm_order'
     get "/orders/complete" => 'orders#complete'
 
     resources :items, only: [:index, :show]
@@ -32,7 +33,7 @@ Rails.application.routes.draw do
       delete :destroy_all, on: :collection
     end
     resources :orders, only: [:new, :create, :index, :show]
-
+    resources :shipping_address, only: [:index, :create, :show, :edit, :update, :destroy]
 
   end
 

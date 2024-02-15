@@ -8,4 +8,6 @@ class OrderDetail < ApplicationRecord
   validates :amount, presence: true
   validates :product_price, presence: true
 
+  enum status: { unable: 0, wait_production: 1, now_production: 2, finish_production: 3 }
+
 end

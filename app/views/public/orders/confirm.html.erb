@@ -72,8 +72,14 @@
     <tr>
       <td><strong>お届け先</strong></td>
       <td>　</td>
-      <td>〒<%= @order.postal_code %><%= @order.address %></br>
+      <td>
+        <% if @select_address == "shipping_address" %>
+          〒<%= @order.shipping_address.postal_code %><%= @order.shipping_address.address %><br>
+          <%= @order.shipping_address.name %>
+        <% else %>
+          〒<%= @order.postal_code %><%= @order.address %></br>
           <%= @order.name %></td>
+        <% end %>
     </tr>
   </table>
   <div class="centered-btn mt-5">

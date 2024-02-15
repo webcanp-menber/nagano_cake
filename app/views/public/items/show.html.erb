@@ -20,7 +20,7 @@
               <%= form_with url: cart_items_path, method: :post do |f| %>
                 <%= f.hidden_field 'cart_item[item_id]', :value => @item.id %>
                 <%= f.hidden_field 'cart_item[customer_id]', :value => current_customer.id %>
-                <%= f.select 'cart_item[amount]', options_for_select([["個数選択", 0], *1..5]) %>
+                <%= f.select 'cart_item[amount]', options_for_select([["個数選択", 0], *1..10]) %>
                 　　<%= f.submit "カートに入れる", class:"btn btn-success btn-long" %>
               <% end %>
           　</td>

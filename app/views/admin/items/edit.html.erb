@@ -13,6 +13,10 @@
   <%= form_with model: @item, url: admin_item_path do |f| %>
   <table class="center mt-5" style="margin: 0 auto;" >
     <tr>
+      <th>商品画像</th>
+      <th><%= f.file_field :image, accept: "image/*" %></th>
+    </tr>
+    <tr>
       <td>商品名</td>
       <td><%= f.text_field :name, size: 31 %></td>
     </tr>
@@ -21,8 +25,21 @@
       <td><%= f.text_area :introduction, rows: 4, cols: 30 %></td>
     </tr>
     <tr>
+      <th>ジャンル</th>
+      <th><%= f.collection_select :genre_id, @genres, :id, :genre %></th>
+    </tr>
+    <tr>
       <td>税抜価格</td>
       <td><%= f.text_field :price, size: 31 %>円</td>
+    </tr>
+    <tr>
+      <th>販売ステータス</th>
+      <th>
+        　<%= f.radio_button :status, true %>
+        <%= f.label :status, "販売中" %>
+        　<%= f.radio_button :status, false %>
+        <%= f.label :status, "販売停止中" %>
+      </th>
     </tr>
   </table>
   <div class="centered-btn mt-3">

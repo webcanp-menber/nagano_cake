@@ -25,8 +25,21 @@
       <th><%= f.text_area :introduction, rows: 4, cols: 30, placeholder:"ここに説明文を記述します" %></th>
     </tr>
     <tr>
+      <th>ジャンル</th>
+      <th><%= f.select :genre, options_for_select(@genres.map{ |genre| [genre.genre] }) %></th>
+    </tr>
+    <tr>
       <th>税抜価格</th>
       <th><%= f.text_field :price, size: 31 %>円</th>
+    </tr>
+    <tr>
+      <th>販売ステータス</th>
+      <th>
+        　<%= f.radio_button :status, Item.statuses.key(0) %>
+        <%= f.label :status_sale, Item.statuses_i18n[:sale] %>
+        　<%= f.radio_button :status, Item.statuses.key(1) %>
+        <%= f.label :status_sale_stop, Item.statuses_i18n[:sale_stop] %>
+      </th>
     </tr>
   </table>
   <div class="centered-btn">

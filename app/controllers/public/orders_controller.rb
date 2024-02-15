@@ -6,10 +6,12 @@ class Public::OrdersController < ApplicationController
     @order = Order.new
     @total = 0
     @cart_items = CartItem.where(customer_id: current_customer.id)
+    @s_addresses = ShippingAddress.where(customer_id: current_customer.id)
   end
 
   def confirm
     @order = Order.new(order_params)
+    @order.customer = current_customer
     @items = Item.all
     @total = 0
     @cart_items = CartItem.where(customer_id: current_customer.id)
@@ -17,6 +19,10 @@ class Public::OrdersController < ApplicationController
       @order.postal_code = current_customer.postal_code
       @order.address = current_customer.address
       @order.name = current_customer.last_name + current_customer.first_name
+    elsif params[:order][:select_address] == "shipping_address"
+      @order.postal_code = @order.customer.shipping_addresses.find(params[:order][:address_id]).postal_code
+      @order.address = @order.customer.shipping_addresses.find(params[:order][:address_id]).address
+      @order.name = @order.customer.shipping_addresses.find(params[:order][:address_id]).name
     elsif params[:order][:select_address] == "new_address"
       @order.postal_code = params[:order][:postal_code]
       @order.address = params[:order][:address]
@@ -65,7 +71,7 @@ class Public::OrdersController < ApplicationController
       @item_names[order_detail.id] = items.join(",")
     end
   end
-  
+
   def show
     @order = Order.find(params[:id])
     @order_details = OrderDetail.where(order_id: @order.id)
