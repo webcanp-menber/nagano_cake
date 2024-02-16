@@ -3,10 +3,6 @@ class Order < ApplicationRecord
   has_many :order_details
   belongs_to :customer
 
-  def formatted_address
-    "〒#{postal_code} #{address} #{name}"
-  end
-
   validates :name, presence: true
   validates :postal_code, presence: true
   validates :address, presence: true
