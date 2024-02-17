@@ -20,23 +20,11 @@ def update
   end
 end
 
-def update
-  @order_detail = OrderDetail.find(params[:id])
-  if @order_detail.update(order_detail_params)
-    redirect_to admin_order_path
-  else
-    redirect_to admin_order_path
-  end
-end
 
 private
 
 def order_params
   params.require(:order).permit(:status).merge(status: params[:order][:status].to_i)
-end
-
-def order_detail_params
-  params.require(:order_detail).permit(:status).merge(status: params[:order_detail][:status].to_i)
 end
 
 end

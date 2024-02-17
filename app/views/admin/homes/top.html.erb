@@ -8,7 +8,6 @@
         <td><strong>購入日時</strong></td>
         <td><strong>購入者</strong></td>
         <td><strong>注文個数</strong></td>
-        <td><strong>注文ステータス</strong></td>
       </tr>
     </thead>
     <tr>
@@ -20,7 +19,6 @@
       </td>
       <td><%= order.name %></td>
       <td><%= order.order_details.sum(:amount) %></td>
-      <td><%= order.status_i18n %></td>
       </tr>
       <% end %>
     </th>
